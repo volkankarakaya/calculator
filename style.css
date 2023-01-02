@@ -1,0 +1,99 @@
+*{
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: sans-serif;
+    background-color: aliceblue;
+}
+
+.buttons{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(80px, auto);
+    max-width: 600px;
+    margin: 0 auto;
+    gap: 8px;
+    padding: 8px;
+    
+}
+
+#display{
+    width: auto;
+    height: 200px;
+    border: 2px solid gray;
+    margin: auto;
+}
+
+.main-container{
+    display: block;
+    border: 8px solid darkgray;
+    width: 600px;
+    margin: 120px auto;
+
+    
+}
+
+#clear-btn{
+    grid-column: 1 / 3;
+    grid-row : 1 / 2;
+    background-color: blanchedalmond;
+    color: black;
+
+}
+
+#delete-btn{
+    grid-column: 3/5;
+    grid-row: 1 / 2;
+    background-color: #E8CFE8;
+    color: black;
+}
+
+#operator-sum-btn{
+    grid-column: 4 / 5;
+    grid-row: 2 / 3
+}
+
+#operator-minus-btn{
+    grid-column:4 / 5;
+    grid-row: 3 / 4;
+
+}
+
+#operator-multiply-btn{
+    grid-column:4 / 5;
+    grid-row: 4 / 5;
+
+}
+
+#operator-division-btn{
+    grid-column: 4 / 5;
+    grid-row: 5 / 6;
+}
+
+#operator-equal-btn{
+    grid-column: 3 / 4;
+    grid-row: 5 / 6;
+}
+
+#number-zero-btn{
+    grid-column: 2 / 3;
+    grid-row: 5 / 6;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    height: 40px;
+    margin-top: 40px;
+    justify-content: center;
+    
+}
+
+.btn{
+    background-color: #84B5DB;
+    color:white;
+
+}
+
+.btn:hover{
+    background-color: #374C5C;
+}
