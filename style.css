@@ -1,6 +1,6 @@
 *{
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 24px;
     font-family: sans-serif;
     background-color: aliceblue;
 }
@@ -96,4 +96,12 @@ footer{
 
 .btn:hover{
     background-color: #374C5C;
+}
+
+#display{
+    display: flex;
+    
+    justify-content: end;
+    align-items: flex-end;
+    
 }
