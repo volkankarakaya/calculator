@@ -1,72 +1,92 @@
 const numbers = document.querySelectorAll(".number");
 const operators = document.querySelectorAll(".operator");
-const equalBtn= document.getElementById('operator-equal-btn');
-let display = document.getElementById('display');
+const equalBtn = document.getElementById("operator-equal-btn");
+
+let displayFirstNumber = document.getElementById("display-first-number");
+let displaySecondNumber = document.getElementById("display-second-number");
+let displayOperator = document.getElementById("display-operator");
 
 let firstNumber = "";
 let secondNumber = "";
 let operator = "";
 
+let shouldClearDisplay = false;
+
 operators.forEach((op) => {
   op.addEventListener("click", (e) => {
-    operator = e.target.innerText;
-    console.log(operator);
+    if (operator === "") {
+      operator = e.target.innerText;
+      displayOperator.innerText = operator;
+    } else if (operator !== ""){
+      operate(firstNumber, secondNumber, operator);
+      operator = e.target.innerText;
+      displayOperator.innerText = operator;
+    }
   });
 });
-
 
 numbers.forEach((number) => {
   number.addEventListener("click", (e) => {
     if (operator === "") {
       if (firstNumber === "") {
         firstNumber = e.target.innerText;
-      } else {
+        displayFirstNumber.innerText = firstNumber;
+      } else if (firstNumber !== "" && shouldClearDisplay === false) {
         firstNumber = `${firstNumber}${e.target.innerText}`;
+        displayFirstNumber.innerText += e.target.innerText;
+      } else if (firstNumber !== "" && shouldClearDisplay === true){
+        firstNumber = e.target.innerText;
+        displayFirstNumber.innerText = firstNumber;
+        shouldClearDisplay = false;
       }
-      console.log('firstnumber', firstNumber)
-      console.log('operator', operator)
     } else {
-      if(secondNumber===""){
+      if (secondNumber === "") {
         secondNumber = e.target.innerText;
-      }else{
-        secondNumber = `${secondNumber}${e.target.innerText}`
+        displaySecondNumber.innerText = secondNumber;
+      } else {
+        secondNumber = `${secondNumber}${e.target.innerText}`;
+        displaySecondNumber.innerText += e.target.innerText;
       }
-      console.log('secondnumber', secondNumber)
-      console.log('operator', operator)
     }
   });
 });
 
-function operate(firstNumber,secondNumber,operator){
-  let result
-  firstNumber = parseInt(firstNumber);
-  secondNumber = parseInt(secondNumber);
-  switch (operator){
-    case '+':
+function operate(firstNumber, secondNumber, operator) {
+  let result;
+  firstNumber = parseInt(displayFirstNumber.innerText);
+  secondNumber = parseInt(displaySecondNumber.innerText);
+  switch (operator) {
+    case "+":
       result = firstNumber + secondNumber;
-      console.log('result', result);
 
-      firstNumber = parseInt(result);
-      secondNumber= ''
-      
+      displayFirstNumber.innerText = result;
+      displaySecondNumber.innerText = "";
+
       break;
-    case '-':
+    case "-":
       result = firstNumber - secondNumber;
-      console.log(result);
+
+      displayFirstNumber.innerText = result;
+      displaySecondNumber.innerText = "";
       break;
-    case '/':
+    case "/":
       result = firstNumber / secondNumber;
-      console.log(result);
+
+      displayFirstNumber.innerText = result;
+      displaySecondNumber.innerText = "";
       break;
-    case '*':
+    case "*":
       result = firstNumber * secondNumber;
-      console.log(result);
+
+      displayFirstNumber.innerText = result;
+      displaySecondNumber.innerText = "";
       break;
   }
-  
-  
-
 }
 
-equalBtn.addEventListener('click', ()=> operate( firstNumber,secondNumber,operator))
-
+equalBtn.addEventListener("click", () => {
+  operate(firstNumber, secondNumber, operator);
+  displayOperator.innerText = "";
+  operator = "";
+  shouldClearDisplay = true;
+});
