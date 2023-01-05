@@ -100,8 +100,10 @@ footer{
 
 #display{
     display: flex;
+    flex-direction: column-reverse;
     
     justify-content: end;
     align-items: flex-end;
     
 }
+
