@@ -1,6 +1,7 @@
 const numbers = document.querySelectorAll(".number");
 const operators = document.querySelectorAll(".operator");
 const equalBtn = document.getElementById("operator-equal-btn");
+const clearBtn = document.getElementById("clear-btn");
 
 let displayFirstNumber = document.getElementById("display-first-number");
 let displaySecondNumber = document.getElementById("display-second-number");
@@ -17,7 +18,7 @@ operators.forEach((op) => {
     if (operator === "") {
       operator = e.target.innerText;
       displayOperator.innerText = operator;
-    } else if (operator !== ""){
+    } else if (operator !== "") {
       operate(firstNumber, secondNumber, operator);
       operator = e.target.innerText;
       displayOperator.innerText = operator;
@@ -34,7 +35,7 @@ numbers.forEach((number) => {
       } else if (firstNumber !== "" && shouldClearDisplay === false) {
         firstNumber = `${firstNumber}${e.target.innerText}`;
         displayFirstNumber.innerText += e.target.innerText;
-      } else if (firstNumber !== "" && shouldClearDisplay === true){
+      } else if (firstNumber !== "" && shouldClearDisplay === true) {
         firstNumber = e.target.innerText;
         displayFirstNumber.innerText = firstNumber;
         shouldClearDisplay = false;
@@ -71,6 +72,7 @@ function operate(firstNumber, secondNumber, operator) {
       break;
     case "/":
       result = firstNumber / secondNumber;
+      result = Math.round(result*1000)/1000;
 
       displayFirstNumber.innerText = result;
       displaySecondNumber.innerText = "";
@@ -89,4 +91,14 @@ equalBtn.addEventListener("click", () => {
   displayOperator.innerText = "";
   operator = "";
   shouldClearDisplay = true;
+});
+
+clearBtn.addEventListener("click", () => {
+  operator = "";
+  firstNumber = "";
+  secondNumber = "";
+  displayFirstNumber.innerText = "";
+  displaySecondNumber.innerText = "";
+  displayOperator.innerText = "";
+  
 });
