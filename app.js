@@ -2,6 +2,7 @@ const numbers = document.querySelectorAll(".number");
 const operators = document.querySelectorAll(".operator");
 const equalBtn = document.getElementById("operator-equal-btn");
 const clearBtn = document.getElementById("clear-btn");
+const decimalBtn = document.getElementById("decimal-btn");
 
 let displayFirstNumber = document.getElementById("display-first-number");
 let displaySecondNumber = document.getElementById("display-second-number");
@@ -54,8 +55,8 @@ numbers.forEach((number) => {
 
 function operate(firstNumber, secondNumber, operator) {
   let result;
-  firstNumber = parseInt(displayFirstNumber.innerText);
-  secondNumber = parseInt(displaySecondNumber.innerText);
+  firstNumber = Number(displayFirstNumber.innerText);
+  secondNumber = Number(displaySecondNumber.innerText);
   switch (operator) {
     case "+":
       result = firstNumber + secondNumber;
@@ -72,7 +73,7 @@ function operate(firstNumber, secondNumber, operator) {
       break;
     case "/":
       result = firstNumber / secondNumber;
-      result = Math.round(result*1000)/1000;
+      result = Math.round(result * 1000) / 1000;
 
       displayFirstNumber.innerText = result;
       displaySecondNumber.innerText = "";
@@ -100,5 +101,21 @@ clearBtn.addEventListener("click", () => {
   displayFirstNumber.innerText = "";
   displaySecondNumber.innerText = "";
   displayOperator.innerText = "";
-  
+});
+
+decimalBtn.addEventListener("click", () => {
+  if (operator === "" && !firstNumber.includes(".")) {
+    if (firstNumber === "") {
+      firstNumber = 0;
+      displayFirstNumber.innerText = firstNumber}
+    firstNumber = firstNumber + ".";
+    displayFirstNumber.innerText += ".";
+  } else if (operator !== "" && !secondNumber.includes(".")) {
+    if (secondNumber === "") {
+      secondNumber = 0;
+      displaySecondNumber = secondNumber;
+    }
+    secondNumber = secondNumber + ".";
+    displaySecondNumber.innerText += ".";
+  }
 });
