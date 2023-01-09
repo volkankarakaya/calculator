@@ -3,6 +3,7 @@ const operators = document.querySelectorAll(".operator");
 const equalBtn = document.getElementById("operator-equal-btn");
 const clearBtn = document.getElementById("clear-btn");
 const decimalBtn = document.getElementById("decimal-btn");
+const deleteBtn = document.getElementById("delete-btn");
 
 let displayFirstNumber = document.getElementById("display-first-number");
 let displaySecondNumber = document.getElementById("display-second-number");
@@ -107,7 +108,8 @@ decimalBtn.addEventListener("click", () => {
   if (operator === "" && !firstNumber.includes(".")) {
     if (firstNumber === "") {
       firstNumber = 0;
-      displayFirstNumber.innerText = firstNumber}
+      displayFirstNumber.innerText = firstNumber;
+    }
     firstNumber = firstNumber + ".";
     displayFirstNumber.innerText += ".";
   } else if (operator !== "" && !secondNumber.includes(".")) {
@@ -117,5 +119,15 @@ decimalBtn.addEventListener("click", () => {
     }
     secondNumber = secondNumber + ".";
     displaySecondNumber.innerText += ".";
+  }
+});
+
+deleteBtn.addEventListener("click", () => {
+  if (operator === "") {
+    firstNumber = firstNumber.slice(0, firstNumber.length - 1);
+    displayFirstNumber.innerText = firstNumber;
+  } else {
+    secondNumber = secondNumber.slice(0, secondNumber.length - 1);
+    displaySecondNumber.innerText = secondNumber;
   }
 });
